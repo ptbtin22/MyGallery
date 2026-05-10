@@ -39,7 +39,7 @@ Each feature is self-contained with its own layers:
 2. Open `PhotoGallery.xcodeproj`.
 3. Build and Run on a **real iOS device** to experience the full AI capabilities.
 
-## Screenshots
+## 📸 Screenshots
 
 | Photo Details & AI | Favorites | Collections |
 | :---: | :---: | :---: |
