@@ -2,15 +2,18 @@
 //  PhotosViewModelProtocol.swift
 //  PhotoGallery
 //
-//  Created by Tin Pham on 13/12/25.
-//
 
+import Foundation
 import Combine
 
 protocol PhotosViewModelProtocol: ObservableObject {
     var photos: [Photo] { get }
     var isLoading: Bool { get }
     var error: Error? { get }
-
-    func loadMorePhotos() async
+    var searchQuery: String { get set }
+    
+    func loadPhotos()
+    func loadMorePhotos()
+    func searchPhotos()
+    func toggleFavorite(photo: Photo)
 }

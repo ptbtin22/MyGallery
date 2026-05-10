@@ -8,13 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		D2300B3A2EEDAB8400A889F6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D2300B392EEDAB8400A889F6 /* Kingfisher */; };
+		D2488D3D2FB09D3700E6ECC8 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = D2488D3C2FB09D3700E6ECC8 /* Swinject */; };
+		D2488D4D2FB09DD900E6ECC8 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = D2488D4C2FB09DD900E6ECC8 /* Cuckoo */; };
+		D2488D4F2FB09DD900E6ECC8 /* CuckooGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = D2488D4E2FB09DD900E6ECC8 /* CuckooGenerator */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D2488D462FB09DA900E6ECC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2F279522EED164900B24A70 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2F279592EED164900B24A70;
+			remoteInfo = PhotoGallery;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		D2488D422FB09DA900E6ECC8 /* PhotoGalleryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoGalleryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F2795A2EED164900B24A70 /* PhotoGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D2488D432FB09DA900E6ECC8 /* PhotoGalleryTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PhotoGalleryTests;
+			sourceTree = "<group>";
+		};
 		D2F2795C2EED164900B24A70 /* PhotoGallery */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PhotoGallery;
@@ -23,11 +42,21 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D2488D3F2FB09DA900E6ECC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2488D4F2FB09DD900E6ECC8 /* CuckooGenerator in Frameworks */,
+				D2488D4D2FB09DD900E6ECC8 /* Cuckoo in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2F279572EED164900B24A70 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D2300B3A2EEDAB8400A889F6 /* Kingfisher in Frameworks */,
+				D2488D3D2FB09D3700E6ECC8 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				D2F2795C2EED164900B24A70 /* PhotoGallery */,
+				D2488D432FB09DA900E6ECC8 /* PhotoGalleryTests */,
 				D2F2795B2EED164900B24A70 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				D2F2795A2EED164900B24A70 /* PhotoGallery.app */,
+				D2488D422FB09DA900E6ECC8 /* PhotoGalleryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +84,31 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D2488D412FB09DA900E6ECC8 /* PhotoGalleryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2488D482FB09DA900E6ECC8 /* Build configuration list for PBXNativeTarget "PhotoGalleryTests" */;
+			buildPhases = (
+				D2488D3E2FB09DA900E6ECC8 /* Sources */,
+				D2488D3F2FB09DA900E6ECC8 /* Frameworks */,
+				D2488D402FB09DA900E6ECC8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2488D472FB09DA900E6ECC8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D2488D432FB09DA900E6ECC8 /* PhotoGalleryTests */,
+			);
+			name = PhotoGalleryTests;
+			packageProductDependencies = (
+				D2488D4C2FB09DD900E6ECC8 /* Cuckoo */,
+				D2488D4E2FB09DD900E6ECC8 /* CuckooGenerator */,
+			);
+			productName = PhotoGalleryTests;
+			productReference = D2488D422FB09DA900E6ECC8 /* PhotoGalleryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D2F279592EED164900B24A70 /* PhotoGallery */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2F2796A2EED164A00B24A70 /* Build configuration list for PBXNativeTarget "PhotoGallery" */;
@@ -71,6 +127,7 @@
 			name = PhotoGallery;
 			packageProductDependencies = (
 				D2300B392EEDAB8400A889F6 /* Kingfisher */,
+				D2488D3C2FB09D3700E6ECC8 /* Swinject */,
 			);
 			productName = PhotoGallery;
 			productReference = D2F2795A2EED164900B24A70 /* PhotoGallery.app */;
@@ -86,6 +143,10 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					D2488D412FB09DA900E6ECC8 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = D2F279592EED164900B24A70;
+					};
 					D2F279592EED164900B24A70 = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
@@ -102,6 +163,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D2300B382EEDAB8400A889F6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D2488D3B2FB09D3700E6ECC8 /* XCRemoteSwiftPackageReference "Swinject" */,
+				D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D2F2795B2EED164900B24A70 /* Products */;
@@ -109,11 +172,19 @@
 			projectRoot = "";
 			targets = (
 				D2F279592EED164900B24A70 /* PhotoGallery */,
+				D2488D412FB09DA900E6ECC8 /* PhotoGalleryTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D2488D402FB09DA900E6ECC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2F279582EED164900B24A70 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,6 +195,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D2488D3E2FB09DA900E6ECC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2F279562EED164900B24A70 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,7 +211,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D2488D472FB09DA900E6ECC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2F279592EED164900B24A70 /* PhotoGallery */;
+			targetProxy = D2488D462FB09DA900E6ECC8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D2488D492FB09DA900E6ECC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8VWT2MD344;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinpham.PhotoGalleryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoGallery.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoGallery";
+			};
+			name = Debug;
+		};
+		D2488D4A2FB09DA900E6ECC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8VWT2MD344;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinpham.PhotoGalleryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoGallery.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoGallery";
+			};
+			name = Release;
+		};
 		D2F279682EED164A00B24A70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -270,7 +398,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,7 +431,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -324,6 +452,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D2488D482FB09DA900E6ECC8 /* Build configuration list for PBXNativeTarget "PhotoGalleryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2488D492FB09DA900E6ECC8 /* Debug */,
+				D2488D4A2FB09DA900E6ECC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D2F279552EED164900B24A70 /* Build configuration list for PBXProject "PhotoGallery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -353,6 +490,22 @@
 				minimumVersion = 8.6.2;
 			};
 		};
+		D2488D3B2FB09D3700E6ECC8 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+		D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Brightify/Cuckoo.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -360,6 +513,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D2300B382EEDAB8400A889F6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		D2488D3C2FB09D3700E6ECC8 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2488D3B2FB09D3700E6ECC8 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		D2488D4C2FB09DD900E6ECC8 /* Cuckoo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */;
+			productName = Cuckoo;
+		};
+		D2488D4E2FB09DD900E6ECC8 /* CuckooGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */;
+			productName = CuckooGenerator;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

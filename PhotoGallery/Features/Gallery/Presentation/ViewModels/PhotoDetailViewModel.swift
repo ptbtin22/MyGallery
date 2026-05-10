@@ -1,0 +1,83 @@
+//
+//  PhotoDetailViewModel.swift
+//  PhotoGallery
+//
+
+import Foundation
+import Combine
+
+protocol PhotoDetailViewModelProtocol: ObservableObject {
+    var photo: Photo { get }
+    var isFavorite: Bool { get }
+    var collections: [PhotoCollection] { get }
+    var isAddingToCollection: Bool { get }
+    
+    func toggleFavorite()
+    func loadCollections()
+    func addToCollection(_ collection: PhotoCollection)
+}
+
+class PhotoDetailViewModel: PhotoDetailViewModelProtocol {
+    @Published var photo: Photo
+    @Published var isFavorite: Bool
+    @Published var collections: [PhotoCollection] = []
+    @Published var isAddingToCollection: Bool = false
+    
+    private let toggleFavoriteUseCase: ToggleFavoriteUseCaseProtocol
+    private let getCollectionsUseCase: GetCollectionsUseCaseProtocol
+    private let addPhotoToCollectionUseCase: AddPhotoToCollectionUseCaseProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(
+        photo: Photo,
+        toggleFavoriteUseCase: ToggleFavoriteUseCaseProtocol,
+        getCollectionsUseCase: GetCollectionsUseCaseProtocol,
+        addPhotoToCollectionUseCase: AddPhotoToCollectionUseCaseProtocol
+    ) {
+        self.photo = photo
+        self.isFavorite = photo.isFavorite
+        self.toggleFavoriteUseCase = toggleFavoriteUseCase
+        self.getCollectionsUseCase = getCollectionsUseCase
+        self.addPhotoToCollectionUseCase = addPhotoToCollectionUseCase
+    }
+    
+    func toggleFavorite() {
+        toggleFavoriteUseCase.execute(photo: photo)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in
+                    self?.isFavorite.toggle()
+                    self?.photo.isFavorite.toggle()
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func loadCollections() {
+        getCollectionsUseCase.execute()
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] collections in
+                    self?.collections = collections
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func addToCollection(_ collection: PhotoCollection) {
+        isAddingToCollection = true
+        addPhotoToCollectionUseCase.execute(photoId: photo.id, collectionId: collection.id)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] _ in
+                    self?.isAddingToCollection = false
+                },
+                receiveValue: { _ in
+                    // Successfully added
+                }
+            )
+            .store(in: &cancellables)
+    }
+}
