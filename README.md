@@ -1,4 +1,4 @@
-# PhotoGallery
+# MyGallery
 
 A modern, high-performance photo gallery application built with SwiftUI, leveraging **Feature-First Clean Architecture**, **MVVM**, and **SOLID** principles.
 
