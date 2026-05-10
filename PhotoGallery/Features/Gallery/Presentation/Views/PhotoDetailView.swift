@@ -16,6 +16,10 @@ struct PhotoDetailView<ViewModel: PhotoDetailViewModelProtocol>: View {
             VStack(alignment: .leading, spacing: 20) {
                 KFImage(viewModel.photo.imageUrl)
                     .resizable()
+                    .onSuccess { result in
+                        // Trigger AI classification once image is loaded
+                        viewModel.classifyImage(result.image)
+                    }
                     .placeholder {
                         Rectangle()
                             .fill(Color.gray.opacity(0.1))
@@ -28,22 +32,43 @@ struct PhotoDetailView<ViewModel: PhotoDetailViewModelProtocol>: View {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text("Author")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Author")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Text(viewModel.photo.author)
+                                .font(.title)
+                                .fontWeight(.bold)
+                        }
+                        
                         Spacer()
+                        
                         Button(action: {
                             viewModel.toggleFavorite()
                         }) {
                             Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
                                 .foregroundColor(viewModel.isFavorite ? .red : .gray)
-                                .font(.title2)
+                                .font(.title)
                         }
                     }
                     
-                    Text(viewModel.photo.author)
-                        .font(.title)
-                        .fontWeight(.bold)
+                    if let category = viewModel.detectedCategory {
+                        HStack {
+                            Image(systemName: "sparkles")
+                                .foregroundColor(.purple)
+                            Text(category.capitalized)
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.purple)
+                            Text("• AI Detected")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 12)
+                        .background(Color.purple.opacity(0.1))
+                        .cornerRadius(20)
+                    }
                     
                     Divider()
                         .padding(.vertical, 8)
@@ -76,8 +101,7 @@ struct PhotoDetailView<ViewModel: PhotoDetailViewModelProtocol>: View {
                         Button(action: {
                             // Share action
                         }) {
-                            HStack {
-                                Spacer()
+                            HStack {Spacer()
                                 Image(systemName: "square.and.arrow.up")
                                 Text("Share Image")
                                 Spacer()
@@ -109,9 +133,15 @@ struct AddToCollectionView<ViewModel: PhotoDetailViewModelProtocol>: View {
         NavigationView {
             List {
                 if viewModel.collections.isEmpty {
-                    Text("No collections found. Create one in the Collections tab!")
-                        .foregroundColor(.secondary)
-                        .padding()
+                    VStack(spacing: 12) {
+                        Text("No collections found.")
+                            .font(.headline)
+                        Text("Create one in the Collections tab first!")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
                 } else {
                     ForEach(viewModel.collections) { collection in
                         Button {
@@ -120,6 +150,7 @@ struct AddToCollectionView<ViewModel: PhotoDetailViewModelProtocol>: View {
                         } label: {
                             HStack {
                                 Image(systemName: "folder")
+                                    .foregroundColor(.accentColor)
                                 Text(collection.name)
                                 Spacer()
                                 if viewModel.isAddingToCollection {

@@ -7,6 +7,7 @@
         <attribute name="thumbnailUrl" optional="YES" attributeType="String"/>
         <attribute name="isFavorite" optional="NO" attributeType="Boolean" defaultValueString="NO"/>
         <attribute name="createdAt" optional="YES" attributeType="Date"/>
+        <attribute name="category" optional="YES" attributeType="String"/>
         <relationship name="collections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CollectionEntity" inverseName="photos" inverseEntity="CollectionEntity"/>
     </entity>
     <entity name="CollectionEntity" representedClassName="CollectionEntity" syncable="YES" codeGenerationType="class">

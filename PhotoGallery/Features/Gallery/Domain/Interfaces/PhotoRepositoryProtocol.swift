@@ -11,4 +11,5 @@ protocol PhotoRepositoryProtocol {
     func toggleFavorite(photo: Photo) -> AnyPublisher<Void, Error>
     func getFavoritePhotos() -> AnyPublisher<[Photo], Error>
     func searchPhotos(query: String) -> AnyPublisher<[Photo], Error>
+    func updateCategory(photoId: String, category: String) -> AnyPublisher<Void, Error>
 }

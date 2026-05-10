@@ -13,4 +13,5 @@ struct Photo: Identifiable, Equatable {
     let imageUrl: URL
     let thumbnailUrl: URL
     var isFavorite: Bool = false
+    var category: String? = nil
 }

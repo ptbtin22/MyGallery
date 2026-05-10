@@ -5,16 +5,19 @@
 
 import Foundation
 import Combine
+import UIKit
 
 protocol PhotoDetailViewModelProtocol: ObservableObject {
     var photo: Photo { get }
     var isFavorite: Bool { get }
     var collections: [PhotoCollection] { get }
     var isAddingToCollection: Bool { get }
+    var detectedCategory: String? { get }
     
     func toggleFavorite()
     func loadCollections()
     func addToCollection(_ collection: PhotoCollection)
+    func classifyImage(_ image: UIImage)
 }
 
 class PhotoDetailViewModel: PhotoDetailViewModelProtocol {
@@ -22,23 +25,28 @@ class PhotoDetailViewModel: PhotoDetailViewModelProtocol {
     @Published var isFavorite: Bool
     @Published var collections: [PhotoCollection] = []
     @Published var isAddingToCollection: Bool = false
+    @Published var detectedCategory: String?
     
     private let toggleFavoriteUseCase: ToggleFavoriteUseCaseProtocol
     private let getCollectionsUseCase: GetCollectionsUseCaseProtocol
     private let addPhotoToCollectionUseCase: AddPhotoToCollectionUseCaseProtocol
+    private let classifyPhotoUseCase: ClassifyPhotoUseCaseProtocol
     private var cancellables = Set<AnyCancellable>()
     
     init(
         photo: Photo,
         toggleFavoriteUseCase: ToggleFavoriteUseCaseProtocol,
         getCollectionsUseCase: GetCollectionsUseCaseProtocol,
-        addPhotoToCollectionUseCase: AddPhotoToCollectionUseCaseProtocol
+        addPhotoToCollectionUseCase: AddPhotoToCollectionUseCaseProtocol,
+        classifyPhotoUseCase: ClassifyPhotoUseCaseProtocol
     ) {
         self.photo = photo
         self.isFavorite = photo.isFavorite
+        self.detectedCategory = photo.category
         self.toggleFavoriteUseCase = toggleFavoriteUseCase
         self.getCollectionsUseCase = getCollectionsUseCase
         self.addPhotoToCollectionUseCase = addPhotoToCollectionUseCase
+        self.classifyPhotoUseCase = classifyPhotoUseCase
     }
     
     func toggleFavorite() {
@@ -74,8 +82,22 @@ class PhotoDetailViewModel: PhotoDetailViewModelProtocol {
                 receiveCompletion: { [weak self] _ in
                     self?.isAddingToCollection = false
                 },
-                receiveValue: { _ in
-                    // Successfully added
+                receiveValue: { _ in }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func classifyImage(_ image: UIImage) {
+        // Only classify if category is missing or unknown
+        guard detectedCategory == nil || detectedCategory == "Unknown" else { return }
+        
+        classifyPhotoUseCase.execute(photo: photo, image: image)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] category in
+                    self?.detectedCategory = category
+                    self?.photo.category = category
                 }
             )
             .store(in: &cancellables)

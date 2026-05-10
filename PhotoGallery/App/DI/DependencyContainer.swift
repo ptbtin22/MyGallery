@@ -25,6 +25,10 @@ class DependencyContainer {
         container.register((any PersistenceServiceProtocol).self) { _ in
             PersistenceController.shared
         }.inObjectScope(.container)
+        
+        container.register((any ImageClassificationServiceProtocol).self) { _ in
+            VisionClassificationService()
+        }.inObjectScope(.container)
     }
     
     private func registerRepositories() {
@@ -64,6 +68,13 @@ class DependencyContainer {
         container.register((any AddPhotoToCollectionUseCaseProtocol).self) { r in
             AddPhotoToCollectionUseCase(repository: r.resolve((any CollectionRepositoryProtocol).self)!)
         }
+        
+        container.register((any ClassifyPhotoUseCaseProtocol).self) { r in
+            ClassifyPhotoUseCase(
+                repository: r.resolve((any PhotoRepositoryProtocol).self)!,
+                classificationService: r.resolve((any ImageClassificationServiceProtocol).self)!
+            )
+        }
     }
     
     private func registerViewModels() {
@@ -77,7 +88,8 @@ class DependencyContainer {
                 photo: photo,
                 toggleFavoriteUseCase: r.resolve((any ToggleFavoriteUseCaseProtocol).self)!,
                 getCollectionsUseCase: r.resolve((any GetCollectionsUseCaseProtocol).self)!,
-                addPhotoToCollectionUseCase: r.resolve((any AddPhotoToCollectionUseCaseProtocol).self)!
+                addPhotoToCollectionUseCase: r.resolve((any AddPhotoToCollectionUseCaseProtocol).self)!,
+                classifyPhotoUseCase: r.resolve((any ClassifyPhotoUseCaseProtocol).self)!
             )
         }
         
