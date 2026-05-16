@@ -6,32 +6,31 @@
 import Foundation
 import Combine
 
-final class NetworkService: NetworkServiceProtocol {
-    private let session: URLSession
+final class NetworkService {
+    private let session: URLSessionProtocol
     
-    init(session: URLSession = .shared) {
+    init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
+}
+
+// MARK: - NetworkServiceProtocol
     
-    private var decoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }
-    
+extension NetworkService: NetworkServiceProtocol {
     func fetchPhotos(page: Int) -> AnyPublisher<[Photo], Error> {
         guard let url = APIEndpoint.photos(page: page).url else {
             return Fail(error: NetworkError.badURL).eraseToAnyPublisher()
         }
         
-        return session.dataTaskPublisher(for: url)
+        return session.publisher(for: url)
             .tryMap { data, response in
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
+                if let httpResponse = response as? HTTPURLResponse,
+                   (200...299).contains(httpResponse.statusCode) {
+                    return data
+                } else {
                     let code = (response as? HTTPURLResponse)?.statusCode ?? -1
                     throw NetworkError.serverError(statusCode: code)
                 }
-                return data
             }
             .decode(type: [PhotoDTO].self, decoder: decoder)
             .map { $0.map { $0.toDomain() } }
@@ -48,5 +47,15 @@ final class NetworkService: NetworkServiceProtocol {
                 photos.filter { $0.author.lowercased().contains(query.lowercased()) }
             }
             .eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Private
+
+extension NetworkService {
+    private var decoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
     }
 }

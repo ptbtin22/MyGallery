@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		D2300B3A2EEDAB8400A889F6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D2300B392EEDAB8400A889F6 /* Kingfisher */; };
 		D2488D3D2FB09D3700E6ECC8 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = D2488D3C2FB09D3700E6ECC8 /* Swinject */; };
-		D2488D4D2FB09DD900E6ECC8 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = D2488D4C2FB09DD900E6ECC8 /* Cuckoo */; };
-		D2488D4F2FB09DD900E6ECC8 /* CuckooGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = D2488D4E2FB09DD900E6ECC8 /* CuckooGenerator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +44,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2488D4F2FB09DD900E6ECC8 /* CuckooGenerator in Frameworks */,
-				D2488D4D2FB09DD900E6ECC8 /* Cuckoo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,8 +98,6 @@
 			);
 			name = PhotoGalleryTests;
 			packageProductDependencies = (
-				D2488D4C2FB09DD900E6ECC8 /* Cuckoo */,
-				D2488D4E2FB09DD900E6ECC8 /* CuckooGenerator */,
 			);
 			productName = PhotoGalleryTests;
 			productReference = D2488D422FB09DA900E6ECC8 /* PhotoGalleryTests.xctest */;
@@ -164,7 +158,6 @@
 			packageReferences = (
 				D2300B382EEDAB8400A889F6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D2488D3B2FB09D3700E6ECC8 /* XCRemoteSwiftPackageReference "Swinject" */,
-				D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D2F2795B2EED164900B24A70 /* Products */;
@@ -228,6 +221,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8VWT2MD344;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinpham.PhotoGalleryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -249,6 +243,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8VWT2MD344;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinpham.PhotoGalleryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,14 +493,6 @@
 				minimumVersion = 2.10.0;
 			};
 		};
-		D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Brightify/Cuckoo.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -518,16 +505,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D2488D3B2FB09D3700E6ECC8 /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
-		};
-		D2488D4C2FB09DD900E6ECC8 /* Cuckoo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */;
-			productName = Cuckoo;
-		};
-		D2488D4E2FB09DD900E6ECC8 /* CuckooGenerator */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D2488D4B2FB09DD900E6ECC8 /* XCRemoteSwiftPackageReference "Cuckoo" */;
-			productName = CuckooGenerator;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -3,14 +3,9 @@
 //  PhotoGallery
 //
 
-import Foundation
+import UIKit
 import Vision
 import Combine
-import UIKit
-
-protocol ImageClassificationServiceProtocol {
-    func classify(image: UIImage) -> AnyPublisher<String, Error>
-}
 
 class VisionClassificationService: ImageClassificationServiceProtocol {
     func classify(image: UIImage) -> AnyPublisher<String, Error> {
@@ -28,7 +23,7 @@ class VisionClassificationService: ImageClassificationServiceProtocol {
             }
             
             let request = VNClassifyImageRequest { request, error in
-                if let error = error {
+                if let error {
                     print("Vision Request Error: \(error)")
                     promise(.failure(error))
                     return
