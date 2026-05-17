@@ -21,12 +21,9 @@ jobs:
           xcode-version: '16.2' # Support Xcode 16 project format 77
 
       - name: Run SwiftLint
-        run: |
-          if which swiftlint >/dev/null; then
-            swiftlint lint --strict
-          else
-            echo "SwiftLint not pre-installed on this runner, skipping linting."
-          fi
+        uses: cirruslabs/swiftlint-action@v1
+        with:
+          execute-in-parallel: true
 
       - name: Cache Swift Package Manager Dependencies
         uses: actions/cache@v4
