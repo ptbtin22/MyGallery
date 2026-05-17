@@ -75,6 +75,7 @@ identifier_name:
     - id
     - URL
     - url
+    - r
 
 # Paths to exclude
 excluded:

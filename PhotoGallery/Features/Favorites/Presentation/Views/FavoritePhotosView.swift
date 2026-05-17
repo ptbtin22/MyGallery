@@ -52,6 +52,7 @@ struct FavoritePhotosView<ViewModel: FavoritePhotosViewModelProtocol>: View {
     
     private func detailView(for photo: Photo) -> some View {
         let detailViewModel = DependencyContainer.shared.resolve((any PhotoDetailViewModelProtocol).self, argument: photo)
+        // swiftlint:disable:next force_cast
         return PhotoDetailView(viewModel: detailViewModel as! PhotoDetailViewModel)
     }
 }

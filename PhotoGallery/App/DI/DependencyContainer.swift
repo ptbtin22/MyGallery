@@ -6,6 +6,8 @@
 import Foundation
 import Swinject
 
+// swiftlint:disable force_unwrapping
+
 class DependencyContainer {
     static let shared = DependencyContainer()
     let container = Container()

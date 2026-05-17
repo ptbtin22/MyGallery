@@ -7,6 +7,8 @@ import Foundation
 import Combine
 import CoreData
 
+// swiftlint:disable force_unwrapping
+
 class PhotoRepository {
     private let networkService: NetworkServiceProtocol
     private let persistenceService: PersistenceServiceProtocol

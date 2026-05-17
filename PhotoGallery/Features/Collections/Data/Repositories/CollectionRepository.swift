@@ -7,6 +7,8 @@ import Foundation
 import Combine
 import CoreData
 
+// swiftlint:disable force_unwrapping
+
 class CollectionRepository {
     private let persistenceService: PersistenceServiceProtocol
     
@@ -69,7 +71,12 @@ extension CollectionRepository: CollectionRepositoryProtocol {
         )
         .flatMap { photoEntities, collectionEntities -> AnyPublisher<Void, Error> in
             guard let photo = photoEntities.first, let collection = collectionEntities.first else {
-                return Fail(error: NSError(domain: "CollectionRepository", code: 404, userInfo: [NSLocalizedDescriptionKey: "Photo or Collection not found"])).eraseToAnyPublisher()
+                let error = NSError(
+                    domain: "CollectionRepository",
+                    code: 404,
+                    userInfo: [NSLocalizedDescriptionKey: "Photo or Collection not found"]
+                )
+                return Fail(error: error).eraseToAnyPublisher()
             }
             
             collection.addToPhotos(photo)
