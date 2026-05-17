@@ -16,7 +16,23 @@ class DependencyContainer {
         registerUseCases()
         registerViewModels()
     }
+}
+
+// MARK: - Internal
+
+extension DependencyContainer {
+    func resolve<T>(_ type: T.Type) -> T {
+        return container.resolve(type)!
+    }
     
+    func resolve<T, Arg>(_ type: T.Type, argument: Arg) -> T {
+        return container.resolve(type, argument: argument)!
+    }
+}
+
+// MARK: - Private
+
+extension DependencyContainer {
     private func registerServices() {
         container.register((any NetworkServiceProtocol).self) { _ in
             NetworkService()
@@ -103,13 +119,5 @@ class DependencyContainer {
                 createCollectionUseCase: r.resolve((any CreateCollectionUseCaseProtocol).self)!
             )
         }
-    }
-    
-    func resolve<T>(_ type: T.Type) -> T {
-        return container.resolve(type)!
-    }
-    
-    func resolve<T, Arg>(_ type: T.Type, argument: Arg) -> T {
-        return container.resolve(type, argument: argument)!
     }
 }

@@ -7,13 +7,17 @@ import Foundation
 import Combine
 import CoreData
 
-class CollectionRepository: CollectionRepositoryProtocol {
+class CollectionRepository {
     private let persistenceService: PersistenceServiceProtocol
     
     init(persistenceService: PersistenceServiceProtocol) {
         self.persistenceService = persistenceService
     }
-    
+}
+
+// MARK: - CollectionRepositoryProtocol
+
+extension CollectionRepository: CollectionRepositoryProtocol {
     func fetchCollections() -> AnyPublisher<[PhotoCollection], Error> {
         let request: NSFetchRequest<CollectionEntity> = NSFetchRequest(entityName: "CollectionEntity")
         request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]

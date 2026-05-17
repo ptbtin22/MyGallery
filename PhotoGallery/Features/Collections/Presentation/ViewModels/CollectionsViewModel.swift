@@ -6,15 +6,6 @@
 import Foundation
 import Combine
 
-protocol CollectionsViewModelProtocol: ObservableObject {
-    var collections: [PhotoCollection] { get }
-    var isLoading: Bool { get }
-    var error: Error? { get }
-    
-    func loadCollections()
-    func createCollection(name: String)
-}
-
 class CollectionsViewModel: CollectionsViewModelProtocol {
     @Published var collections: [PhotoCollection] = []
     @Published var isLoading: Bool = false

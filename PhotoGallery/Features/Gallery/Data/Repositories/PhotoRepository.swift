@@ -7,7 +7,7 @@ import Foundation
 import Combine
 import CoreData
 
-class PhotoRepository: PhotoRepositoryProtocol {
+class PhotoRepository {
     private let networkService: NetworkServiceProtocol
     private let persistenceService: PersistenceServiceProtocol
     private var subscriptions = Set<AnyCancellable>()
@@ -16,7 +16,11 @@ class PhotoRepository: PhotoRepositoryProtocol {
         self.networkService = networkService
         self.persistenceService = persistenceService
     }
-    
+}
+
+// MARK: - PhotoRepositoryProtocol
+
+extension PhotoRepository: PhotoRepositoryProtocol {
     func fetchPhotos(page: Int) -> AnyPublisher<[Photo], Error> {
         return networkService.fetchPhotos(page: page)
             .handleEvents(receiveOutput: { [weak self] photos in
@@ -91,9 +95,11 @@ class PhotoRepository: PhotoRepositoryProtocol {
             }
             .eraseToAnyPublisher()
     }
-    
-    // MARK: - Private Methods
-    
+}
+ 
+// MARK: - Private
+
+extension PhotoRepository {
     private func cachePhotos(_ photos: [Photo]) {
         let context = persistenceService.viewContext
         photos.forEach { photo in

@@ -14,6 +14,8 @@ protocol PersistenceServiceProtocol {
     func delete(_ object: NSManagedObject) -> AnyPublisher<Void, Error>
 }
 
+// MARK: - PersistenceController
+
 extension PersistenceController: PersistenceServiceProtocol {
     var viewContext: NSManagedObjectContext {
         return container.viewContext
@@ -47,23 +49,7 @@ extension PersistenceController: PersistenceServiceProtocol {
     }
     
     func delete(_ object: NSManagedObject) -> AnyPublisher<Void, Error> {
-        Future { promise in
-            self.container.viewContext.delete(object)
-            self.save().sink(
-                receiveCompletion: { completion in
-                    if case let .failure(error) = completion {
-                        promise(.failure(error))
-                    }
-                },
-                receiveValue: { _ in
-                    promise(.success(()))
-                }
-            ).store(in: &CancellableBag.shared.subscriptions)
-        }.eraseToAnyPublisher()
+        self.container.viewContext.delete(object)
+        return self.save()
     }
-}
-
-class CancellableBag {
-    static let shared = CancellableBag()
-    var subscriptions = Set<AnyCancellable>()
 }
